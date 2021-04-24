@@ -12,8 +12,7 @@ function App() {
 
   useEffect(() => {
     let articles = retrieveArticles('watches');
-    //console.log(articles);
-    
+
     let newGlobalState = {...state};
     newGlobalState.remoteArticles = articles ? articles : [];
     setState(newGlobalState);
@@ -22,11 +21,12 @@ function App() {
 
 
  const openModal = () => {
-   console.log('opening')
    let newGlobalState = {...state};
    newGlobalState.newLocalArticleOpen = true;
    setState(newGlobalState);
  }
+
+ let articlesToShow = state.currentPage === "local" ? state.localArticles : state.remoteArticles;
 
   return (
     <div className="App">
@@ -35,11 +35,16 @@ function App() {
       <div>
           <button className="newAticle_button" onClick={openModal}>New Article</button>
       </div>
+      <div className="articles">
       {
-        state.remoteArticles && state.remoteArticles.map((article) => {
-          <Post name={''} content={article.content}/>
+        articlesToShow.map((article) => {
+          return (
+            <Post name={article.name} content={article.content} id={article.id}/>
+          )
         })
       }
+      </div>
+      
     </div>
   );
 }

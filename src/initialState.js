@@ -1,6 +1,9 @@
 export const initialState = {
-    value: 'value',
+    currentPage: 'local',
     remoteArticles : [],
     localArticles: [],
-    newLocalArticleOpen: false
+    newLocalArticleOpen: false,
+    initialID : 1,
+    currentLocalArticle: 0,
+    mode: 'CREATE'
 }
