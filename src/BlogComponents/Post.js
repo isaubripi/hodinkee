@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-expressions */
+
 import React, { useContext } from 'react';
 import {Context} from '../Store';
 
@@ -25,15 +25,21 @@ const Post = (props) => {
         <div className="postContainer">
             <div className="contentContainer">
                 <div className="textContainer">
-                    <div>{props.name}</div>
-                    <div>{props.content}</div>
+                    <h1 className="hodinkee_article_content">{props.title}</h1>
+                    <div className="hodinkee_article_content">{props.content}</div>
                 </div>
                 <div className="imageContainer">
                     image goes here
                 </div>
             </div>
-            <button onClick={()=>editArticle(props.id)}>Edit</button>
-            <button onClick={()=>deleteArticle(props.id)}>Delete</button>
+            {
+                state.currentPage === "local" ? 
+                <>
+                <button className="hodinkee_button_form" onClick={()=>editArticle(props.id)}>Edit</button>
+                <button className="hodinkee_button_form" onClick={()=>deleteArticle(props.id)}>Delete</button> 
+                </>: ""
+            }
+            
         </div>
     )
 }

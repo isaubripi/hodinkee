@@ -86,6 +86,7 @@ const NewLocalArticle = () => {
             }
         });
         newGlobalState.newLocalArticleOpen = false;
+        newGlobalState.mode = 'CREATE';
         setState(newGlobalState);
         localStorage.setItem("localArticles",JSON.stringify(state.localArticles));
         cleanForm();
@@ -97,9 +98,9 @@ const NewLocalArticle = () => {
             <div className="subModal__box">
                 <p className="subModal__close" onClick={closeModal}></p>
                 <div className="subModal__content">
-                    <label>Title</label>
+                    <label className="hodinkee_label">Title</label>
                     <input id="title" type="text" onChange={(e)=>handleChange(e)} value={localState.title} />
-                    <label>Content</label>
+                    <label className="hodinkee_label">Content</label>
                     <textarea id="content" onChange={(e)=>handleChange(e)} value={localState.content} />
                     {/* <ImageUploader
                         withIcon={true}
@@ -108,11 +109,11 @@ const NewLocalArticle = () => {
                         imgExtension={['.jpg', '.gif', '.png', '.gif']}
                         maxFileSize={5242880}
                     /> */}
-                    <label>Image</label>
+                    <label className="hodinkee_label">Image</label>
                     <input id="image" type="file" onChange={(e)=>onChangeImage(e)} value={localState.image} />
                 </div>
                 {
-                    state.mode === "CREATE" ? <button onClick={createArticle}>Create</button> : <button onClick={updateArticle}>Update</button>
+                    state.mode === "CREATE" ? <button className="hodinkee_button_form" onClick={createArticle}>Create</button> : <button className="hodinkee_button_form" onClick={updateArticle}>Update</button>
                 }
             </div>
         </div>

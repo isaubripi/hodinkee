@@ -105,6 +105,13 @@
     position: absolute;
     left: 10px;
     bottom: 10px;
+    font-family: Brown,sans-serif;
+    font-size: 1.75rem;
+    line-height: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
 }
 
 .itemsHeader {
@@ -117,12 +124,21 @@
 .itemHeader {
   margin-left:100px;
   cursor:pointer;
+  font-family: Brown,sans-serif;
+  font-size: .75rem;
+  line-height: 1rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: .05em;
 }
 
 .articles {
   position: absolute;
   top: 100px;
   margin: 30px 30px 30px 30px;
+  width:97%;
 }
 
 .contentContainer {
@@ -131,9 +147,64 @@
 
 .postContainer {
   position: relative;
-  width: 530px;
   padding: 40px 30px 35px 30px;
   border-radius: 4px;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.2);
-  background: #ffffff;
+  background: #d4c0f336;
+  margin-bottom: 20px;
+}
+
+.hodinkee_button {
+    position: absolute;
+    top: 70px;
+    right: 40px;
+    cursor: pointer;
+    display: inline-block;
+    padding: .75rem 1rem;
+    text-align: center;
+    font-family: Brown,sans-serif;
+    font-weight: 600;
+    font-size: .75rem;
+    line-height: 1rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: .025em;
+    transition: background-color .2s ease-in-out,border-color .2s ease-in-out;
+}
+
+.hodinkee_button_form {
+  margin-left: 10px;
+  cursor: pointer;
+  display: inline-block;
+  padding: .75rem 1rem;
+  text-align: center;
+  font-family: Brown,sans-serif;
+  font-weight: 600;
+  font-size: .75rem;
+  line-height: 1rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  transition: background-color .2s ease-in-out,border-color .2s ease-in-out;
+}
+
+.hodinkee_label {
+  display: inline-block;
+  padding: .75rem 1rem;
+  text-align: center;
+  font-family: Brown,sans-serif;
+  font-weight: 600;
+  font-size: .75rem;
+  line-height: 1rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  transition: background-color .2s ease-in-out,border-color .2s ease-in-out;
+}
+
+.hodinkee_article_content {
+    font-family: Portrait Text,serif;
+    font-style: normal;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
 }

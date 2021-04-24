@@ -1,3 +1,5 @@
+import { retrieveArticles } from '../src/APICallers/APICaller';
+
 export const initialState = {
     currentPage: 'local',
     remoteArticles : [],

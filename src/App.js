@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import './App.css';
 import {Context} from './Store';
-import { retrieveArticles } from '../src/APICallers/APICaller';
+import { retrieveArticles, mockRemoteArticles } from '../src/APICallers/APICaller';
 import Header from './BlogComponents/Header';
 import Post from './BlogComponents/Post';
 import NewLocalArticle from './BlogComponents/NewLocalArticle';
@@ -11,13 +11,14 @@ function App() {
   const [state, setState] = useContext(Context);
 
   useEffect(() => {
-    let articles = retrieveArticles('watches');
-
+    //let articles = retrieveArticles('watches');
+    let articles = mockRemoteArticles();
+    console.log(articles);
     let newGlobalState = {...state};
     newGlobalState.remoteArticles = articles ? articles : [];
     setState(newGlobalState);
     console.log(state);
- }, []);
+ },[]);
 
 
  const openModal = () => {
@@ -33,18 +34,19 @@ function App() {
       <NewLocalArticle/>
       <Header/>
       <div>
-          <button className="newAticle_button" onClick={openModal}>New Article</button>
+        { state.currentPage === "local" ? <button className="hodinkee_button" onClick={openModal}>New Article</button> : ""}   
       </div>
-      <div className="articles">
       {
-        articlesToShow.map((article) => {
-          return (
-            <Post name={article.name} content={article.content} id={article.id}/>
-          )
-        })
+        articlesToShow.length ? <div className="articles">
+        { 
+          articlesToShow.map((article) => {
+            return (
+              <Post title={article.title} content={article.content} id={article.id}/>
+            )
+          })
+        }
+        </div> : <div className="articles">No Articles to show</div>
       }
-      </div>
-      
     </div>
   );
 }
