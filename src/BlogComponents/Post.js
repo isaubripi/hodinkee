@@ -28,8 +28,8 @@ const Post = (props) => {
                     <h1 className="hodinkee_article_content">{props.title}</h1>
                     <div className="hodinkee_article_content">{props.content}</div>
                 </div>
-                <div className="imageContainer">
-                    image goes here
+                <div className={ state.currentPage === "local" ? "imageContainer" : "display-none"}>
+                    <img className="image" src={props.preview} alt=""/>
                 </div>
             </div>
             {

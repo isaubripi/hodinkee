@@ -10,8 +10,11 @@ const NewLocalArticle = () => {
         title: '',
         content: '',
         image: null,
+        imagePreviewUrl: null,
         id: ''
     })
+
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const loadArticleData = (id) => {
         state.localArticles.map((article)=> {
@@ -20,6 +23,7 @@ const NewLocalArticle = () => {
                 newLocalState.title = article.title;
                 newLocalState.content = article.content;
                 newLocalState.image = article.image;
+                newLocalState.imagePreviewUrl = article.previewUrl;
                 setLocalState(newLocalState);
             }
         })
@@ -50,11 +54,27 @@ const NewLocalArticle = () => {
         console.log(localState);
     }
 
+    const handleImageChange = (e) => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+    
+        reader.onloadend = () => {
+            let newLocalState = {...localState}
+            newLocalState.image = file;
+            newLocalState.imagePreviewUrl = reader.result;
+            setLocalState(newLocalState);
+        }
+        reader.readAsDataURL(file)
+        console.log(localState);
+      }
+
     const cleanForm = () => {
         let newLocalState = {...localState};
         newLocalState.title = '';
         newLocalState.content = '';
         newLocalState.image = null;
+        newLocalState.imagePreviewUrl = null;
         setLocalState(newLocalState);
     }
 
@@ -64,7 +84,8 @@ const NewLocalArticle = () => {
             title: localState.title,
             content: localState.content,
             image: localState.image,
-            id: state.initialID + 1
+            id: state.initialID + 1,
+            previewUrl : localState.imagePreviewUrl
         }
         newGlobalState.localArticles.push(newArticle);
         newGlobalState.newLocalArticleOpen = false;
@@ -83,6 +104,7 @@ const NewLocalArticle = () => {
                 article.title = localState.title;
                 article.content = localState.content;
                 article.image =  localState.image;
+                article.previewUrl = localState.imagePreviewUrl;
             }
         });
         newGlobalState.newLocalArticleOpen = false;
@@ -110,7 +132,11 @@ const NewLocalArticle = () => {
                         maxFileSize={5242880}
                     /> */}
                     <label className="hodinkee_label">Image</label>
-                    <input id="image" type="file" onChange={(e)=>onChangeImage(e)} value={localState.image} />
+                    <input id="image" type="file" onChange={(e) => handleImageChange(e)} value={selectedFile} />
+                    <div className="imgPreview">
+                        <img className="image" src={localState.imagePreviewUrl} alt=""/>
+                    </div>
+                    
                 </div>
                 {
                     state.mode === "CREATE" ? <button className="hodinkee_button_form" onClick={createArticle}>Create</button> : <button className="hodinkee_button_form" onClick={updateArticle}>Update</button>

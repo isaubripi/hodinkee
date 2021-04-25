@@ -41,7 +41,12 @@ function App() {
         { 
           articlesToShow.map((article) => {
             return (
-              <Post title={article.title} content={article.content} id={article.id}/>
+              <Post 
+              title={article.title} 
+              content={article.content} 
+              id={article.id} 
+              image={article.image}
+              preview={article.previewUrl}/>
             )
           })
         }
