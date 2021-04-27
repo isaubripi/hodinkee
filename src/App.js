@@ -10,16 +10,22 @@ function App() {
 
   const [state, setState] = useContext(Context);
 
-  useEffect(() => {
-    //let articles = retrieveArticles('watches');
-    let articles = mockRemoteArticles();
-    console.log(articles);
-    let newGlobalState = {...state};
-    newGlobalState.remoteArticles = articles ? articles : [];
-    setState(newGlobalState);
-    console.log(state);
- },[]);
+  useEffect(() => { //to get Remote Articles
+    if(state.currentPage === "remote")
+      retrieveArticles('watches', state, setState);
+ },[state.currentPage]);
 
+
+ useEffect(() => { //to get Local Articles, from store (if exists)
+    let localArticles = JSON.parse(localStorage.getItem("localArticles")) ? JSON.parse(localStorage.getItem("localArticles")) : [];
+    localArticles.sort((a, b) => (a.id > b.id) ? 1 : -1);
+    if(localArticles.length && state.currentPage === "local"){
+      let newGlobalState = {...state};
+      newGlobalState.localArticles = localArticles;
+      newGlobalState.initialID = localArticles[localArticles.length-1].id;
+      setState(newGlobalState)
+    }
+ },[state.currentPage]);
 
  const openModal = () => {
    let newGlobalState = {...state};

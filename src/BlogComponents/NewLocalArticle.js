@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from 'react';
-import ImageUploader from 'react-images-upload';
 import '../App.css';
 import {Context} from '../Store';
 
@@ -47,13 +46,6 @@ const NewLocalArticle = () => {
         console.log(localState);
     }
 
-    const onChangeImage = (e) => {
-        let newLocalState = {...localState}
-        newLocalState.image = e.target.files[0]
-        setLocalState(newLocalState);
-        console.log(localState);
-    }
-
     const handleImageChange = (e) => {
         e.preventDefault();
         let reader = new FileReader();
@@ -61,12 +53,11 @@ const NewLocalArticle = () => {
     
         reader.onloadend = () => {
             let newLocalState = {...localState}
-            newLocalState.image = file;
-            newLocalState.imagePreviewUrl = reader.result;
+            const base64String = reader.result;
+            newLocalState.image = base64String;
             setLocalState(newLocalState);
         }
         reader.readAsDataURL(file)
-        console.log(localState);
       }
 
     const cleanForm = () => {
@@ -85,13 +76,11 @@ const NewLocalArticle = () => {
             content: localState.content,
             image: localState.image,
             id: state.initialID + 1,
-            previewUrl : localState.imagePreviewUrl
         }
         newGlobalState.localArticles.push(newArticle);
         newGlobalState.newLocalArticleOpen = false;
         newGlobalState.initialID = newGlobalState.initialID + 1;
         setState(newGlobalState);
-        console.log(state)
         localStorage.setItem("localArticles",JSON.stringify(state.localArticles));
         cleanForm();
     }
@@ -104,7 +93,6 @@ const NewLocalArticle = () => {
                 article.title = localState.title;
                 article.content = localState.content;
                 article.image =  localState.image;
-                article.previewUrl = localState.imagePreviewUrl;
             }
         });
         newGlobalState.newLocalArticleOpen = false;
@@ -124,17 +112,10 @@ const NewLocalArticle = () => {
                     <input id="title" type="text" onChange={(e)=>handleChange(e)} value={localState.title} />
                     <label className="hodinkee_label">Content</label>
                     <textarea id="content" onChange={(e)=>handleChange(e)} value={localState.content} />
-                    {/* <ImageUploader
-                        withIcon={true}
-                        buttonText='Choose images'
-                        onChange={onChangeImage}
-                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                        maxFileSize={5242880}
-                    /> */}
                     <label className="hodinkee_label">Image</label>
                     <input id="image" type="file" onChange={(e) => handleImageChange(e)} value={selectedFile} />
                     <div className="imgPreview">
-                        <img className="image" src={localState.imagePreviewUrl} alt=""/>
+                        <img className="image" src={localState.image} alt=""/>
                     </div>
                     
                 </div>

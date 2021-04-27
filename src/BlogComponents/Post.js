@@ -1,9 +1,13 @@
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect,useState } from 'react';
 import {Context} from '../Store';
+import {base64ImageToBlob} from '../Helpers/Helpers'
 
 const Post = (props) => {
     const [state, setState] = useContext(Context);
+    const [localState, setLocalState] = useState({
+        imagePreview: null
+    })
 
     const editArticle = (id) => {
         let newGlobalState = {...state};
@@ -19,7 +23,25 @@ const Post = (props) => {
             return article.id !== id;
         })
         setState(newGlobalState);
+        localStorage.setItem("localArticles",JSON.stringify(newGlobalState.localArticles));
     }
+
+    const generatePreview = () => {
+        let reader = new FileReader();
+        const file = base64ImageToBlob(props.image);
+    
+        reader.onloadend = () => {
+            let newLocalState = {...localState}
+            newLocalState.imagePreview = reader.result;
+            setLocalState(newLocalState);
+        }
+        reader.readAsDataURL(file)
+      }
+
+    useEffect(() => {
+        if(state.currentPage === "local" && state.localArticles)
+            generatePreview(); 
+     },[state.mode, state.localArticles]);
 
     return (
         <div className="postContainer">
@@ -29,7 +51,7 @@ const Post = (props) => {
                     <div className="hodinkee_article_content">{props.content}</div>
                 </div>
                 <div className={ state.currentPage === "local" ? "imageContainer" : "display-none"}>
-                    <img className="image" src={props.preview} alt=""/>
+                    <img className="image" src={localState.imagePreview} alt=""/>
                 </div>
             </div>
             {
