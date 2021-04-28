@@ -104,7 +104,7 @@
 .blogHeader {
     position: absolute;
     left: 10px;
-    bottom: 10px;
+    bottom: 18px;
     font-family: Brown,sans-serif;
     font-size: 1.75rem;
     line-height: 1rem;
@@ -118,7 +118,8 @@
     display: flex;
     left: 300px;
     position: relative;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .itemHeader {
@@ -227,4 +228,35 @@
 
 .display-none {
   display:none;
+}
+
+.image-post {
+  width:50%;
+  height:50%;
+}
+
+.textContainer{
+  width: 800px;
+  height: 600px;
+  margin:auto;
+}
+
+.imageContainer {
+  margin:auto;
+}
+
+.buttonContainer {
+  display: flex;
+  margin-top: 20px;
+}
+
+.is-sticky {
+  position: fixed;
+  right: 0;
+  left: 0;
+  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
+  box-shadow: 0 0 transparent,0 0 transparent,var(--tw-shadow);
+  box-shadow: var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);
+  z-index: 30;
+  background:white;
 }

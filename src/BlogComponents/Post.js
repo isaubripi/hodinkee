@@ -51,14 +51,17 @@ const Post = (props) => {
                     <div className="hodinkee_article_content">{props.content}</div>
                 </div>
                 <div className={ state.currentPage === "local" ? "imageContainer" : "display-none"}>
-                    <img className="image" src={localState.imagePreview} alt=""/>
+                    <img className="image-post" src={localState.imagePreview} alt=""/>
                 </div>
             </div>
             {
                 state.currentPage === "local" ? 
                 <>
-                <button className="hodinkee_button_form" onClick={()=>editArticle(props.id)}>Edit</button>
-                <button className="hodinkee_button_form" onClick={()=>deleteArticle(props.id)}>Delete</button> 
+                <div className="buttonContainer">
+                    <button className="hodinkee_button_form" onClick={()=>editArticle(props.id)}>Edit</button>
+                    <button className="hodinkee_button_form" onClick={()=>deleteArticle(props.id)}>Delete</button> 
+                </div>
+                
                 </>: ""
             }
             

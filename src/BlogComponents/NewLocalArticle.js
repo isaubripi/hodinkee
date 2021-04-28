@@ -47,17 +47,20 @@ const NewLocalArticle = () => {
     }
 
     const handleImageChange = (e) => {
-        e.preventDefault();
-        let reader = new FileReader();
-        let file = e.target.files[0];
+        if(e.target.files[0].size < 1100000){
+            e.preventDefault();
+            let reader = new FileReader();
+            let file = e.target.files[0];
     
-        reader.onloadend = () => {
-            let newLocalState = {...localState}
-            const base64String = reader.result;
-            newLocalState.image = base64String;
-            setLocalState(newLocalState);
-        }
-        reader.readAsDataURL(file)
+            reader.onloadend = () => {
+                let newLocalState = {...localState}
+                const base64String = reader.result;
+                newLocalState.image = base64String;
+                setLocalState(newLocalState);
+            }
+            reader.readAsDataURL(file)
+        } else
+            alert('Image size is bigger than allowed!')
       }
 
     const cleanForm = () => {

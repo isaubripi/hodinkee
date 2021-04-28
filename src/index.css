@@ -12,15 +12,6 @@ code {
     monospace;
 }
 
-.is-sticky {
-  position: fixed;
-  right: 0;
-  left: 0;
-  top: 20px;
-  --tw-shadow: 0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);
-  box-shadow: 0 0 transparent,0 0 transparent,var(--tw-shadow);
-  box-shadow: var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow);
-  z-index: 30;
-}
+
 
 
