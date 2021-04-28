@@ -109,7 +109,7 @@ const NewLocalArticle = () => {
     return (
         <div className={"subModal" + (showModal ? " subModal_oppened" : "")}>
             <div className="subModal__box">
-                <p className="subModal__close" onClick={closeModal}></p>
+                <p className="subModal__close" onClick={closeModal}>x</p>
                 <div className="subModal__content">
                     <label className="hodinkee_label">Title</label>
                     <input id="title" type="text" onChange={(e)=>handleChange(e)} value={localState.title} />
